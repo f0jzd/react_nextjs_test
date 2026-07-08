@@ -7,7 +7,6 @@ import localFont from "next/font/local"
 import "./globals.css";
 import Link from "next/link";
 import MainNav from "@/components/main_nav";
-import MainNavLoggedIn from "@/components/main_nav_logged_in";
 import { useApp } from "@/context/AuthContext";
 import AppProviderWrapper from "@/components/app-context/AppProviderWrapper";
 

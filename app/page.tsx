@@ -19,17 +19,17 @@ function Card({ name, image }: CardProps) {
 
   return (
     <div className="h-full overflow-hidden grid grid-rows-[200px_1fr_auto] ">
-      <h3>{name}</h3>
+      <h3 className="px-2 py-2">{name}</h3>
       <Image
         src={image ? image : "https://placehold.co/600x400"}
         alt=""
         width={600}
         height={400}
         unoptimized={image ? false : true}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover order-first"
         loading="eager"
       />
-      <a href="#">läs mer</a>
+      <a href="#" className="px-2 pb-2">läs mer</a>
     </div>
   );
 }
@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <section>
+      <section className="max-w-7xl mx-auto">
         <h2>Futurama things &amp; Crew</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo,
@@ -62,7 +62,7 @@ export default function Home() {
         </p>
         {/* grid-cols-1 md:grid-cols-3 lg:grid-cols-4 */}
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(30ch,1fr))] gap-4">
-          {characters.map((char) => (
+          {characters.slice(0,8).map((char) => (
 
             <li key={char.id} className="outline-amber-200 outline-1">
               <Card {...char}/>

@@ -3,17 +3,19 @@
 
 import { useState } from "react";
 import { useApp } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 
 
-function TestButton() {
 
-   
+function LogInButton() {
 
-  const {isLoggedIn, setIsLoggedIn } = useApp();
+  const {setIsLoggedIn } = useApp();
+  const router = useRouter();
 
   const handleClick = () => {
-    setIsLoggedIn(!isLoggedIn);    
+    setIsLoggedIn(true);    
+    router.push("/profile")
   };
 
   return (
@@ -21,7 +23,7 @@ function TestButton() {
       onClick={handleClick}
       className={`px-4 py-2 rounded-lg text-white font-medium transition bg-amber-500`}
     >
-      DOes Nothing
+      Log In?
     </button>
   );
 }
@@ -34,9 +36,7 @@ export default function LoginPage(){
             <div>
             -- Log in goes here --
 
-            <TestButton></TestButton>
-
-            
+            <LogInButton />
 
             </div>
         </main>

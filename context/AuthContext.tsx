@@ -10,7 +10,7 @@ import React, { createContext, useContext, useState } from "react";
 
 // "The box will contain:
 // a true/false value called loggedIn
-// a function called setLoggedIn that changes it"
+// a function called setLoggedIn that changes it"*
 type AppContextType = {
     isLoggedIn:boolean;
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;

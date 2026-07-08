@@ -13,10 +13,6 @@ interface buttonProps{
     className?: string;
 }
 
-
-
-
-
 function TestButton() {
 
     const [color, setColor] = useState("bg-blue-600");
@@ -58,16 +54,6 @@ function Button({ link,children,className}:buttonProps) {
   );
 }
 
-function TestingFunctions(){
-    console.log("AJSDLKAJDLSAJ")
-}
-
-function multiply(x:number,y:number): number{ /*Kan strunta i return type om man vill*/
-    return x*y
-
-    // {multiply(3,4)}  <- för att anropa i react 
-
-}
 
 export default function Hero() {
   return (
