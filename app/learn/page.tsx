@@ -1,7 +1,7 @@
 export default function ContactPage(){
     return (
         <main>
-            <div className="relative">
+            <div>
             Learn More
 
             </div>

@@ -1,9 +1,15 @@
+
+
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto, Atomic_Age } from "next/font/google";
 import localFont from "next/font/local"
 import "./globals.css";
 import Link from "next/link";
 import MainNav from "@/components/main_nav";
+import MainNavLoggedIn from "@/components/main_nav_logged_in";
+import { useApp } from "@/context/AuthContext";
+import AppProviderWrapper from "@/components/app-context/AppProviderWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +45,10 @@ export const metadata: Metadata = {
 };
 
 
+let loggedIn = false;
+
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,8 +60,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${atomic_age.variable} ${materialSymbols.variable} h-full antialiased`}
     >
       <body className="min-h-full">
+        <AppProviderWrapper>
         <MainNav />
         {children}
+        </AppProviderWrapper>
       </body>
     </html>
   );

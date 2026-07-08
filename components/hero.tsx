@@ -15,6 +15,8 @@ interface buttonProps{
 
 
 
+
+
 function TestButton() {
 
     const [color, setColor] = useState("bg-blue-600");
@@ -45,7 +47,7 @@ function TestButton() {
 }
 
 function Button({ link,children,className}:buttonProps) {
-    const defaultName = "bg-orange-500 hover:bg-amber-700 hover:animate-pulse rotate";
+    const defaultName = "bg-orange-500 hover:bg-amber-700 hover:animate-pulse";
   return (
     <a
       href={link}

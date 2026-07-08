@@ -1,27 +1,15 @@
-"use client"
-
-
 import Link from "next/link";
 import Image from "next/image";
-import { useApp } from "@/context/AuthContext";
 
 
-
-
-
-export default function MainNav(){
-    const { isLoggedIn: isLoggedIn } = useApp();
-
-    const links = [
-        
-            {href: "/about", label: "About"},
-            {href: "/contact", label: "Contact"},
-            {href: "/learn", label: "Learn"},
+const links = [
     
+        {href: "/about", label: "About"},
+        {href: "/contact", label: "Contact"}
+    
+]
 
-            {href: isLoggedIn ? "/profile" : "/login", label: isLoggedIn ? "Profile" : "Log in"},
-      
-    ]
+export default function MainNavLoggedIn(){
     return (
         <header>
             <nav className="group sticky z-10 top-0 flex justify-between w-full items-center">
@@ -48,9 +36,10 @@ export default function MainNav(){
                     {link.label}
                     </Link>)}
 
-                    {/* <Link href="/learn" className="px-3 py-2 text-gray-400 hover:text-white transition ease-linear duration-100">Learn More</Link>
+                    <Link href="/learn" className="px-3 py-2 text-gray-400 hover:text-white transition ease-linear duration-100">Learn More</Link>
                     <Link href="/about" className="px-3 py-2 text-gray-400 hover:text-white transition ease-linear duration-100">About</Link>
-                    <Link href="/contact" className="px-3 py-2 text-gray-400 hover:text-white transition ease-linear duration-100">Contact</Link> */}
+                    <Link href="/contact" className="px-3 py-2 text-gray-400 hover:text-white transition ease-linear duration-100">Contact</Link>
+                    <Link href="/profile-page" className="px-3 py-2 text-gray-400 hover:text-white transition ease-linear duration-100">Profile</Link>
                 </nav>
             </nav>
         </header>
