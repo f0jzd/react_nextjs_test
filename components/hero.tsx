@@ -30,6 +30,7 @@ function TestButton() {
   const handleClick = () => {
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     setColor(randomColor);
+
     
     
   };
@@ -37,9 +38,9 @@ function TestButton() {
   return (
     <button
       onClick={handleClick}
-      className={`px-4 py-2 rounded-lg text-white font-medium transition hover:bg-blue-700 ${color}`}
+      className={`px-4 py-2 rounded-lg text-white font-medium transition hover:bg-fuchsia-950 ${color}`}
     >
-      DOes Nothing
+      CLICK ME!
     </button>
   );
 }
