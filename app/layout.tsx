@@ -1,6 +1,3 @@
-
-
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Roboto, Atomic_Age } from "next/font/google";
 import localFont from "next/font/local"
@@ -56,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${atomic_age.variable} ${materialSymbols.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${atomic_age.variable} ${materialSymbols.variable} h-full antialiased`} /*Loads fonts into the html for use later*/
     >
       <body className="min-h-full">
         <AppProviderWrapper>

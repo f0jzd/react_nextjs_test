@@ -34,11 +34,11 @@ export default function MainNav(){
 
 
 
-                <nav className="flex justify-center gap-4 text-xl px-3 items-center">
-                    <div className="flex items-center">
+                <nav className="flex flex-wrap justify-center gap-4 text-xl px-3 items-center">
+                    {/* <div className="flex items-center">
                         <label htmlFor="searchfield"><span className="material-symbols block mx-3 my-2 ">search</span></label>
                         <input type="text" placeholder="Testing" name="searchfield" className="border-2 rounded-sm"/>
-                    </div>
+                    </div> */}
 
                     {links.map((link)=><Link 
                     key={link.href} 
