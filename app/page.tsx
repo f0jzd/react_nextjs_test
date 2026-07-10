@@ -1,5 +1,6 @@
 import FuturamaGrid from "@/components/futuramagrid";
 import Hero from "@/components/hero";
+import PoeGrid from "@/components/poe-unique-grid";
 
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
     <main>
       <Hero />
       <FuturamaGrid />
+      <PoeGrid />
     </main>
   );
 }

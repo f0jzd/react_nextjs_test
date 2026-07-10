@@ -51,8 +51,9 @@ export default function FuturamaGrid() {
   const { page, pages, items: characters } = data;
 
   return (
-    <div className="bg-linear-to-b from-slate-950 to-transparent">
-      <section className="max-w-7xl mx-auto ">
+    <div className="relative">
+    <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-slate-950/0 to-slate-950 pointer-events-none"/>
+      <section className="relative max-w-7xl mx-auto ">
         <h2 className="mb-3 text-xl">Futurama things &amp; Crew</h2>
         <p className="mb-3">
           Here are some of the characters and other beings from the{" "}
