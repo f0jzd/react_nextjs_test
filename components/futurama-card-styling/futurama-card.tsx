@@ -36,7 +36,7 @@ export default function FuturamaCard({ image, name, gender, className }: GenderS
         <h4 className={`${className}`}>{gender}</h4>
 
         <a href="#" className="px-2 pb-2">
-          läs mer
+          Learn More?
         </a>
       </div>
     </div>

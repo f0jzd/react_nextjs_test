@@ -19,15 +19,15 @@ export default function MainNav() {
   ];
   return (
     <header>
-      <nav className="group sticky z-10 top-0 flex justify-between w-full items-center">
+      <nav className="sticky z-10 top-0 flex justify-between w-full items-center">
         <Link href={"/"}>
-          <div className="flex items-center text-3xl gap-3 px-3 transition">
+          <div className="group flex items-center text-3xl gap-3 px-3 transition">
             <Image
               src="/dog.webp"
               alt=""
               width={112}
               height={112}
-              className="w-1/3 h-auto"
+              className="w-1/3 h-auto motion-reduce animate-[spin_4s_linear_infinite]"
             />
             <span className="text-gray-400 group-hover:text-white  transition ease-linear duration-100">
               W-L-P
