@@ -23,7 +23,7 @@ interface CardProps extends Item {
 };
 
 
-function Card({ itemNumber, id, name, item_class }: CardProps) {
+function Card({ itemNumber, name, item_class }: CardProps) {
 //   const styles = genderStyles[gender as keyof typeof genderStyles] || genderStyles.default;
 
   return (
@@ -31,7 +31,7 @@ function Card({ itemNumber, id, name, item_class }: CardProps) {
       
 
       <div className="flex flex-col items-center px-2 py-2 gap-2">
-        <h3 className="text-xl">{`${itemNumber} : ${id}`}</h3>
+        <h3 className="text-xl text-center">{`${itemNumber} : ${name}`} - {item_class}</h3>
       </div>
     </div>
   );
@@ -44,8 +44,8 @@ export default function PoeGrid() {
 
   return (
     <div className="bg-linear-to-b from-slate-950 via-transparent to-slate-950">
-      <section className="max-w-7xl mx-auto min-h-70">
-        
+      <section className="max-w-7xl mx-auto">
+        <h2 className="py-2">Path of Exile Unique Items</h2>
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(30ch,1fr))] gap-5">
            {itemList.slice(0,20).map(([itemNumber, item]) => (
             <li key={itemNumber}>
