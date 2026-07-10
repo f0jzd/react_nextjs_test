@@ -84,7 +84,6 @@ export default function FuturamaGrid() {
   const pageSize = 10;
 
   const nextPageClick = () => {
-    const pageSize = 10;
 
     if (from + pageSize < characters.length) {
       setFrom((prev) => prev + pageSize);
