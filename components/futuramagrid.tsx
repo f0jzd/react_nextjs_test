@@ -15,7 +15,7 @@ interface CardProps {
   species: string;
   createdAt: string;
   image: string | null;
-
+  slug?: string;
 }
 
 interface GenderStyling extends CardProps{
@@ -49,8 +49,10 @@ function PrevPageBtn({onClick}: PageBtnProps) {
 
 
 
-function Card({ image, name, gender, className }: GenderStyling) {
+function Card({ id ,image, name, gender, className,slug}: GenderStyling) {
 //   const styles = genderStyles[gender as keyof typeof genderStyles] || genderStyles.default;
+
+
 
   return (
     <div className={`h-full gap-3 flex flex-col overflow-hidden rounded-lg justify-between outline-2`}>
@@ -69,7 +71,7 @@ function Card({ image, name, gender, className }: GenderStyling) {
 
         { <h4 className={`${className}`}>{gender}</h4> }
 
-        <a href="#" className="px-2 py-2 bg-emerald-900 rounded-lg">
+        <a href={`/character/${id}`} className="px-2 py-2 bg-emerald-900 rounded-lg">
           Learn More
         </a>
       </div>
@@ -78,7 +80,9 @@ function Card({ image, name, gender, className }: GenderStyling) {
 }
 
 export default function FuturamaGrid() {
-  const { page, pages, items: characters } = data;
+  
+  const {items: characters } = data;
+  
 
   const [from, setFrom] = useState(0);
   const pageSize = 10;
