@@ -87,7 +87,7 @@ export default function Hero() {
             <span className="text-yellow-500">majestic wildlife</span>? In this
             program we will teach our students the best way to traverse the
             wilds to capture the aesthetics of different wildlife without
-            disturbing the natural peace.
+            disturbing the natural peace. 
           </p>
         </header>
         <div className="flex flex-wrap gap-4">

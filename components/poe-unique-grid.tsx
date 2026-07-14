@@ -1,4 +1,6 @@
 import data from "@/data/poe-unique-test.json";
+import { slugify } from "@/lib/util";
+import Link from "next/link";
 
 
 interface Item  {
@@ -27,13 +29,13 @@ function Card({ itemNumber, name, item_class }: CardProps) {
 //   const styles = genderStyles[gender as keyof typeof genderStyles] || genderStyles.default;
 
   return (
-    <div className={`my-2  h-full flex flex-col overflow-hidden rounded-lg outline-2 justify-center`}>
-      
 
+    <Link href={`/unique-item/${slugify(name)}`} className={`my-2  h-full flex flex-col overflow-hidden rounded-lg outline-2 justify-center hover:bg-gray-600 transition`}>
       <div className="flex flex-col items-center px-2 py-2 gap-2">
-        <h3 className="text-xl text-center">{`${itemNumber} : ${name}`} - {item_class}</h3>
+        <h3 className="text-xl text-center">{`${name}`} - {item_class}</h3>
       </div>
-    </div>
+    </Link>
+
   );
 }
 
