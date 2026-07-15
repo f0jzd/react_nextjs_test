@@ -4,12 +4,15 @@
 import Link from "next/link";
 import { slugify } from "@/lib/util";
 
+import jeffJpg from "@/public/jeff.png"
 import data from "@/data/characters.json";
 import Image from "next/image";
 import FemaleCard from "./futurama-card-styling/futurama-female-card";
 import MaleCard from "./futurama-card-styling/futurama-male-card";
 import { getCharactersRestApi } from "@/data/characters";
 import { getCharactersGraphQL } from "@/data/characters-graph";
+
+
 
 interface CardProps {
   id: number;
@@ -81,18 +84,21 @@ function Card({ id ,image, name, gender, className}: GenderStyling) {
   );
 }
 
-export default async function FuturamaGrid() {
+export default async function FuturamaGrid({currentPage,
+  currentLimit,
+  query,
+}: {
+  currentPage: number;
+  currentLimit: number;
+  query?: string;}) {
   
-  const {items: characters } = data;
-
-  const newCharactersREST = await getCharactersRestApi();
-
-  const newCharactersGraphQL = await getCharactersGraphQL();
-
-
-  console.log(newCharactersGraphQL);
-
   
+  const newCharactersREST = await getCharactersRestApi(currentPage,currentLimit,query);
+
+  // const {items: characters } = data;
+
+  //const newCharactersGraphQL = await getCharactersGraphQL();
+  // console.log(newCharactersGraphQL);
 
   // //const [from, setFrom] = useState(0);
   // const pageSize = 10;
@@ -109,12 +115,13 @@ export default async function FuturamaGrid() {
   //   }
   // };
 
+  
   return (
     <div className="relative">
       <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-slate-950/0 to-slate-950 pointer-events-none" />
       <section className="relative max-w-7xl mx-auto ">
         <h2 className="mb-3 text-xl">Futurama things &amp; Crew</h2>
-        <p className="mb-3"> 
+        <p className="mb-3">
           Here are some of the characters and other beings from the{" "}
           <a
             href="https://en.wikipedia.org/wiki/Futurama"
@@ -125,28 +132,58 @@ export default async function FuturamaGrid() {
           </a>{" "}
           universe.
         </p>
-        {/* grid-cols-1 md:grid-cols-3 lg:grid-cols-4 */}
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(30ch,1fr))] gap-4">
-          {/* {characters.slice(from, from + 10).map((char) => ( */}
-          {newCharactersGraphQL.map((char) => (
-            <li key={char.id}>
-              {/* {char.gender === "FEMALE" ? <FemaleCard image={char.image} name={char.name}/> :
-              char.gender === "MALE" ? <MaleCard image={char.image} name={char.name}/> :
-               */}
-              <Card
-                {...char}
-                className={
-                  char.gender === "MALE"
-                    ? "text-blue-500"
-                    : char.gender === "FEMALE"
-                      ? "text-pink-500"
-                      : "text-gray-500"
-                }
-              />
-              {/* } */}
-            </li>
-          ))}
-        </ul>
+
+         {query === "" ? (<p></p>) : 
+            
+            (<p className="mx-auto w-fit py-4">{`Showing Results of "${query}"`}</p>)
+            
+        }
+
+        {newCharactersREST.items.length === 0 ? (
+          <div className="flex flex-col pb-4 gap-4 ">
+            <p className="mx-auto w-fit text-2xl">Found no items matching {`"${query}"`}</p>
+            <Image
+              src={jeffJpg}
+              alt=""
+              width={410}
+              height={386}
+              className="w-1/3 h-auto object-cover overflow-hidden max-h-400 rounded-2xl mx-auto"
+              loading="eager" />
+          </div>
+        ) : (
+          <div>
+            <ul className="grid grid-cols-[repeat(auto-fill,minmax(30ch,1fr))] gap-4">
+              {/* {characters.slice(from, from + 10).map((char) => ( */}
+              {newCharactersREST.items.map((char) => (
+                <li key={char.id}>
+                  {/* {char.gender === "FEMALE" ? <FemaleCard image={char.image} name={char.name}/> :
+                char.gender === "MALE" ? <MaleCard image={char.image} name={char.name}/> :
+                 */}
+                  <Card
+                    {...char}
+                    className={
+                      char.gender === "MALE"
+                        ? "text-blue-500"
+                        : char.gender === "FEMALE"
+                          ? "text-pink-500"
+                          : "text-gray-500"
+                    }
+                  />
+                  {/* } */}
+                </li>
+              ))}
+            </ul>
+                    <div className="py-4 text-xl flex justify-evenly">
+                      <p>{`Page ${currentPage}`}</p>
+                      <p>{`Showing ${currentLimit} items`}</p>
+                    </div>
+          </div>
+          
+        )}
+
+       
+
+
         {/* <div className="flex items-center gap-5 py-5">
           <p className="">
             Showing from {from} to {from + 10}
