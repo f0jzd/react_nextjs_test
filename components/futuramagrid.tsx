@@ -4,15 +4,13 @@
 import Link from "next/link";
 import { slugify } from "@/lib/util";
 
-import jeffJpg from "@/public/jeff.png"
+import jeffJpg from "@/public/jeff.png";
 import data from "@/data/characters.json";
 import Image from "next/image";
 import FemaleCard from "./futurama-card-styling/futurama-female-card";
 import MaleCard from "./futurama-card-styling/futurama-male-card";
 import { getCharactersRestApi } from "@/data/characters";
 import { getCharactersGraphQL } from "@/data/characters-graph";
-
-
 
 interface CardProps {
   id: number;
@@ -24,42 +22,43 @@ interface CardProps {
   image: string | null;
 }
 
-interface GenderStyling extends CardProps{
-    className?: string;
+interface GenderStyling extends CardProps {
+  className?: string;
 }
 
-
-interface PageBtnProps{
+interface PageBtnProps {
   onClick: () => void;
 }
 
-function NextPageBtn({onClick}: PageBtnProps) {
+function NextPageBtn({ onClick }: PageBtnProps) {
   return (
     <button
       className="bg-mist-600 py-3 px-3 rounded-xl transition hover:bg-emerald-900"
-      onClick={onClick}>
+      onClick={onClick}
+    >
       next
     </button>
   );
 }
 
-function PrevPageBtn({onClick}: PageBtnProps) {
+function PrevPageBtn({ onClick }: PageBtnProps) {
   return (
     <button
       className="bg-mist-600 py-3 px-3 rounded-xl transition hover:bg-emerald-900"
-      onClick={onClick}>
+      onClick={onClick}
+    >
       previous
     </button>
   );
 }
 
-
-
-function Card({ id ,image, name, gender, className}: GenderStyling) {
-//   const styles = genderStyles[gender as keyof typeof genderStyles] || genderStyles.default;
+function Card({ id, image, name, gender, className }: GenderStyling) {
+  //   const styles = genderStyles[gender as keyof typeof genderStyles] || genderStyles.default;
 
   return (
-    <div className={`h-full gap-3 flex flex-col overflow-hidden rounded-lg justify-between outline-2`}>
+    <div
+      className={`h-full gap-3 flex flex-col overflow-hidden rounded-lg justify-between outline-2`}
+    >
       <Image
         src={image ? image : "https://placehold.co/600x400"}
         alt=""
@@ -75,8 +74,10 @@ function Card({ id ,image, name, gender, className}: GenderStyling) {
 
         <h4 className={`${className}`}>{gender}</h4>
 
-
-        <Link href={`/character/${slugify(name)}`} className="px-2 py-2 bg-emerald-900 rounded-lg">
+        <Link
+          href={`/character/${slugify(name)}`}
+          className="px-2 py-2 bg-emerald-900 rounded-lg"
+        >
           Learn More
         </Link>
       </div>
@@ -84,16 +85,22 @@ function Card({ id ,image, name, gender, className}: GenderStyling) {
   );
 }
 
-export default async function FuturamaGrid({currentPage,
+export default async function FuturamaGrid({
+  currentPage,
   currentLimit,
   query,
 }: {
   currentPage: number;
   currentLimit: number;
-  query?: string;}) {
-  
-  
-  const newCharactersREST = await getCharactersRestApi(currentPage,currentLimit,query);
+  query?: string;
+}) {
+  const newCharactersREST = await getCharactersRestApi(
+    currentPage,
+    currentLimit,
+    query,
+  );
+
+  //console.log(newCharactersREST);
 
   // const {items: characters } = data;
 
@@ -115,7 +122,8 @@ export default async function FuturamaGrid({currentPage,
   //   }
   // };
 
-  
+  console.log(query)
+
   return (
     <div className="relative">
       <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-slate-950/0 to-slate-950 pointer-events-none" />
@@ -133,22 +141,25 @@ export default async function FuturamaGrid({currentPage,
           universe.
         </p>
 
-         {query === "" ? (<p></p>) : 
-            
-            (<p className="mx-auto w-fit py-4">{`Showing Results of "${query}"`}</p>)
-            
-        }
+        {query === "" ? (
+          <p></p>
+        ) : (
+          <p className="mx-auto w-fit py-4">{`Showing Results of "${query}"`}</p>
+        )}
 
         {newCharactersREST.items.length === 0 ? (
           <div className="flex flex-col pb-4 gap-4 ">
-            <p className="mx-auto w-fit text-2xl">Found no items matching {`"${query}"`}</p>
+            <p className="mx-auto w-fit text-2xl">
+              Found no items matching {`"${query}"`}
+            </p>
             <Image
               src={jeffJpg}
               alt=""
               width={410}
               height={386}
               className="w-1/3 h-auto object-cover overflow-hidden max-h-400 rounded-2xl mx-auto"
-              loading="eager" />
+              loading="eager"
+            />
           </div>
         ) : (
           <div>
@@ -173,16 +184,14 @@ export default async function FuturamaGrid({currentPage,
                 </li>
               ))}
             </ul>
-                    <div className="py-4 text-xl flex justify-evenly">
-                      <p>{`Page ${currentPage}`}</p>
-                      <p>{`Showing ${currentLimit} items`}</p>
-                    </div>
+            <div className="py-4 flex-col text-xl flex justify-evenly">
+              <Pagination currentPage={currentPage}></Pagination>
+
+              <p>{`Page ${currentPage}`}</p>
+              {/* <p>{`Showing ${currentLimit} items`}</p> */}
+            </div>
           </div>
-          
         )}
-
-       
-
 
         {/* <div className="flex items-center gap-5 py-5">
           <p className="">
@@ -193,5 +202,32 @@ export default async function FuturamaGrid({currentPage,
         </div> */}
       </section>
     </div>
+  );
+}
+
+function Pagination({
+  currentPage,
+}: {
+  currentPage: number;
+}) {
+  return (
+    <nav className="flex gap-4">
+      <Link
+        href={{
+          pathname: "/",
+          query: { page: currentPage - 1 },
+        }}
+      >
+        Previous Page
+      </Link>
+      <Link
+        href={{
+          pathname: "/",
+          query: { page: currentPage + 1 },
+        }}
+      >
+        Next Page
+      </Link>
+    </nav>
   );
 }

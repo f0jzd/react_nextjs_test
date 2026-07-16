@@ -17,14 +17,18 @@ export default async function Home({
   // searchParams: Promise<{ page: string }>;
 }) {
 
-  const { pageString, limit, query } = await searchParams;
+  // const { page: pageString, limit, query } = await searchParams;
 
-
+   const {page:pageString, limit, query} = await searchParams;
+  
+  // const pageString = params.page;
+  // const limit = params.limit;
+  // const query = params.query;
   const currentPage = pageString ? Number(pageString) : 1; //Current page of items?
-  const currentLimit = limit ? Number(limit) : 10;//Items per page
+  const currentLimit = limit ? Number(limit) : 20;//Items per page, how many items were requested or returned
 
 
-  console.log(pageString)
+
 
 
 

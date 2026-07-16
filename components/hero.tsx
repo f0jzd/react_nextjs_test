@@ -71,6 +71,7 @@ export default function Hero() {
         alt=""
         placeholder="blur"
         sizes="100vw"
+        loading="eager"
       />
 
 
