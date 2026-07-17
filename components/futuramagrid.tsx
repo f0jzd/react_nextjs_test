@@ -1,16 +1,9 @@
-// "use client";
-
-// import { useState } from "react";
 import Link from "next/link";
 import { slugify } from "@/lib/util";
-
 import jeffJpg from "@/public/jeff.png";
-import data from "@/data/characters.json";
 import Image from "next/image";
-import FemaleCard from "./futurama-card-styling/futurama-female-card";
-import MaleCard from "./futurama-card-styling/futurama-male-card";
 import { getCharactersRestApi } from "@/data/characters";
-import { getCharactersGraphQL } from "@/data/characters-graph";
+import { ReactNode } from "react";
 
 interface CardProps {
   id: number;
@@ -94,35 +87,23 @@ export default async function FuturamaGrid({
   currentLimit: number;
   query?: string;
 }) {
+
   const newCharactersREST = await getCharactersRestApi(
     currentPage,
     currentLimit,
     query,
   );
 
-  //console.log(newCharactersREST);
+  const { items, page, pages } = newCharactersREST;
+  console.log(pages);
 
-  // const {items: characters } = data;
+  const visiblePages = 11;
+  let startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
 
-  //const newCharactersGraphQL = await getCharactersGraphQL();
-  // console.log(newCharactersGraphQL);
+  let endPage = Math.min(pages, startPage + visiblePages - 1);
 
-  // //const [from, setFrom] = useState(0);
-  // const pageSize = 10;
-
-  // const nextPageClick = () => {
-
-  //   if (from + pageSize < characters.length) {
-  //     setFrom((prev) => prev + pageSize);
-  //   }
-  // };
-  // const prevPageClick = () => {
-  //   if (from > 0) {
-  //     setFrom((prev) => prev - pageSize);
-  //   }
-  // };
-
-  console.log(query)
+  // Adjust start if we're near the end
+  startPage = Math.max(1, endPage - visiblePages + 1);
 
   return (
     <div className="relative">
@@ -148,6 +129,9 @@ export default async function FuturamaGrid({
         )}
 
         {newCharactersREST.items.length === 0 ? (
+
+          
+          
           <div className="flex flex-col pb-4 gap-4 ">
             <p className="mx-auto w-fit text-2xl">
               Found no items matching {`"${query}"`}
@@ -164,12 +148,8 @@ export default async function FuturamaGrid({
         ) : (
           <div>
             <ul className="grid grid-cols-[repeat(auto-fill,minmax(30ch,1fr))] gap-4">
-              {/* {characters.slice(from, from + 10).map((char) => ( */}
               {newCharactersREST.items.map((char) => (
                 <li key={char.id}>
-                  {/* {char.gender === "FEMALE" ? <FemaleCard image={char.image} name={char.name}/> :
-                char.gender === "MALE" ? <MaleCard image={char.image} name={char.name}/> :
-                 */}
                   <Card
                     {...char}
                     className={
@@ -184,22 +164,34 @@ export default async function FuturamaGrid({
                 </li>
               ))}
             </ul>
-            <div className="py-4 flex-col text-xl flex justify-evenly">
+            <div className="py-4 flex-col text-xl flex justify-evenly items-center">
               <Pagination currentPage={currentPage}></Pagination>
 
-              <p>{`Page ${currentPage}`}</p>
-              {/* <p>{`Showing ${currentLimit} items`}</p> */}
+              <div className="flex gap-4 items-center">
+                {[...Array(endPage - startPage + 1)].map((_, i) => {
+                  //const pageNr = i + 1;
+                  const page = startPage + i;
+                  return(
+                
+                    <PageNumber
+                    key={page}
+                    query={{ page }}
+                    currentPage={currentPage === page}
+                    >
+                      {page}
+                    </PageNumber>
+                   );
+                })}
+              </div>
+
+              {pages > 1 && (
+                <p>
+                  {`Page ${currentPage}`} of {newCharactersREST.pages}
+                </p>
+              )}
             </div>
           </div>
         )}
-
-        {/* <div className="flex items-center gap-5 py-5">
-          <p className="">
-            Showing from {from} to {from + 10}
-          </p>
-          <PrevPageBtn onClick={prevPageClick} />
-          <NextPageBtn onClick={nextPageClick} />
-        </div> */}
       </section>
     </div>
   );
@@ -207,8 +199,12 @@ export default async function FuturamaGrid({
 
 function Pagination({
   currentPage,
+  page,
+  pages,
 }: {
   currentPage: number;
+  page?: number;
+  pages?: number;
 }) {
   return (
     <nav className="flex gap-4">
@@ -218,7 +214,9 @@ function Pagination({
           query: { page: currentPage - 1 },
         }}
       >
-        Previous Page
+        <span className="material-symbols text-gray-400 hover:text-white transition">
+          arrow_back_ios
+        </span>
       </Link>
       <Link
         href={{
@@ -226,8 +224,24 @@ function Pagination({
           query: { page: currentPage + 1 },
         }}
       >
-        Next Page
+        <span className="material-symbols text-gray-400 hover:text-white transition">
+          arrow_forward_ios
+        </span>
       </Link>
     </nav>
+  );
+}
+
+export function PageNumber({ query, currentPage, children, } : { query: { [key: string]: number }; currentPage?: boolean; children: ReactNode; }) {
+  return (
+    <Link
+      className={`${currentPage && "bg-neutral-500 px-2 rounded-full"}`}
+      href={{
+        pathname: "/",
+        query:  query ,
+      }}
+    >
+      {children}
+    </Link>
   );
 }

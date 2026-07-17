@@ -14,7 +14,12 @@ interface CharacterType {
 
 interface CharacterResponse{
   items: CharacterType[]
+  total: number,
+  page: number,
+  size: number,
+  pages: number
 }
+
 
 
 
@@ -85,6 +90,8 @@ export async function getCharactersRestApi(
 
   const jsonData = await fetchspecificData.json();
 
+  
+
   if (!fetchspecificData.ok) {
     throw new Error(
       `Error in response from fetch: ${fetchspecificData.status}`,
@@ -94,4 +101,6 @@ export async function getCharactersRestApi(
 
   return jsonData;
 }
+
+
 
