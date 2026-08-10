@@ -8,7 +8,6 @@ We then broke down that information using the .json() method to get access and c
 
 We worked with REST and GraphQL API calls, but I ended up working most with REST.
 
-
 ## Testing
 
 1. Clone the repository to your preferred location
