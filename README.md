@@ -27,7 +27,6 @@ and start the local server to see the project in action
 - Browse through most characters in the Futurama Universe using the arrows.
 - Responsive design.
 - Has a pseudo login where the UI is based on the users state of being logged in or not.
-- 
 
 ## Technologies
 
@@ -38,6 +37,14 @@ and start the local server to see the project in action
 - NPM
 - Git
 - GitHub
+
+## API
+
+The project uses the Futurama API to get all the characters.
+
+Documentation:
+
+https://futuramaapi.com/docs
 
 ## Preview of project
 
