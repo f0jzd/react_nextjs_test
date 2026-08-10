@@ -11,17 +11,24 @@ We worked with REST and GraphQL API calls, but I ended up working most with REST
 
 ## Testing
 
-To run the program you need have Node and then run: 
+1. Clone the repository to your preferred location
+2. Install dependencies
+```
+npm install
+```
+3. Then run the program using: 
 ```
 npm run dev
 ```
-to start the local server to see the project in action
+and start the local server to see the project in action
 
 ## Features 
 
 - A search function for finding the specific character in the Futurama API (Though its parameters for finding are very specific).
 - Browse through most characters in the Futurama Universe using the arrows.
 - Responsive design.
+- Has a pseudo login where the UI is based on the users state of being logged in or not.
+- 
 
 ## Technologies
 
