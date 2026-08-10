@@ -1,3 +1,5 @@
+# React and NextJS
+
 This is my first time working with API:s calls and fetching information to destructure it down into a json and use that to show the data on the page.
 
 We used API calls to a Futurama API which returned information about various characters from the show in an array which also had the amount of pages for all the information.
