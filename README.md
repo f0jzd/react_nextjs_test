@@ -16,3 +16,6 @@ To run the program you need have Node and then run:
 npm run dev
 ```
 to start the local server to see the project in action
+
+<img width="1244" height="776" alt="Screenshot 2026-08-10 131705" src="https://github.com/user-attachments/assets/d24dc00c-064b-4ba3-aa5d-bf99f18091fa" />
+
