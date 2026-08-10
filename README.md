@@ -7,3 +7,13 @@ We used API calls to a Futurama API which returned information about various cha
 We then broke down that information using the .json() method to get access and control how and what is being shown.
 
 We worked with REST and GraphQL API calls, but I ended up working most with REST.
+
+
+## Testing
+
+To run the program you need have Node and then run: 
+```
+npm run dev
+
+```
+to start the local server to see the project in action
