@@ -14,6 +14,5 @@ We worked with REST and GraphQL API calls, but I ended up working most with REST
 To run the program you need have Node and then run: 
 ```
 npm run dev
-
 ```
 to start the local server to see the project in action
