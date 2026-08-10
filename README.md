@@ -17,5 +17,25 @@ npm run dev
 ```
 to start the local server to see the project in action
 
+## Features 
+
+- A search function for finding the specific character in the Futurama API (Though its parameters for finding are very specific).
+- Browse through most characters in the Futurama Universe using the arrows.
+- Responsive design.
+
+## Technologies
+
+- HTML
+- CSS
+- TypeScript
+- React
+- NPM
+- Git
+- GitHub
+
+## Preview of project
+
 <img width="1244" height="776" alt="Screenshot of project" src="https://github.com/user-attachments/assets/d24dc00c-064b-4ba3-aa5d-bf99f18091fa" />
+
+
 
