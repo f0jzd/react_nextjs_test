@@ -1,13 +1,17 @@
 import FuturamaGrid from "@/components/futuramagrid";
 import Hero from "@/components/hero";
 import PoeGrid from "@/components/poe-unique-grid";
-import Form from "next/form"
+import Form from "next/form";
 import { getCharactersRestApi } from "@/data/characters";
 import { getCharactersGraphQL } from "@/data/characters-graph";
 import { headers } from "next/headers";
 import SearchForm from "@/components/search-form";
+import Searchbar from "@/components/search-bar";
+import { Suspense } from "react";
 
-
+function SearchBarFallback() {
+  return <>placeholder</>;
+}
 
 export default async function Home({
   searchParams,
@@ -16,21 +20,15 @@ export default async function Home({
   searchParams: Promise<{ [key: string]: string | undefined }>;
   // searchParams: Promise<{ page: string }>;
 }) {
-
   // const { page: pageString, limit, query } = await searchParams;
 
-   const {page:pageString, limit, query} = await searchParams;
-  
+  const { page: pageString, limit, query } = await searchParams;
+
   // const pageString = params.page;
   // const limit = params.limit;
   // const query = params.query;
   const currentPage = pageString ? Number(pageString) : 1; //Current page of items?
-  const currentLimit = limit ? Number(limit) : 20;//Items per page, how many items were requested or returned
-
-
-
-
-
+  const currentLimit = limit ? Number(limit) : 20; //Items per page, how many items were requested or returned
 
   // const json = (await getCharactersRestApi());
   // console.log(json);
@@ -43,11 +41,16 @@ export default async function Home({
   return (
     <main>
       <Hero />
+      <Suspense fallback={<SearchBarFallback />}>
+        <Searchbar />
+      </Suspense>
       <SearchForm />
-      <FuturamaGrid currentPage={currentPage} currentLimit={currentLimit} query={query} />
+      <FuturamaGrid
+        currentPage={currentPage}
+        currentLimit={currentLimit}
+        query={query}
+      />
       {/* <PoeGrid /> */}
     </main>
   );
 }
-
-

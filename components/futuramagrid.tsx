@@ -87,7 +87,6 @@ export default async function FuturamaGrid({
   currentLimit: number;
   query?: string;
 }) {
-
   const newCharactersREST = await getCharactersRestApi(
     currentPage,
     currentLimit,
@@ -100,7 +99,7 @@ export default async function FuturamaGrid({
   const visiblePages = 11;
   let startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
 
-  let endPage = Math.min(pages, startPage + visiblePages - 1);
+  const endPage = Math.min(pages, startPage + visiblePages - 1);
 
   // Adjust start if we're near the end
   startPage = Math.max(1, endPage - visiblePages + 1);
@@ -129,9 +128,6 @@ export default async function FuturamaGrid({
         )}
 
         {newCharactersREST.items.length === 0 ? (
-
-          
-          
           <div className="flex flex-col pb-4 gap-4 ">
             <p className="mx-auto w-fit text-2xl">
               Found no items matching {`"${query}"`}
@@ -171,16 +167,15 @@ export default async function FuturamaGrid({
                 {[...Array(endPage - startPage + 1)].map((_, i) => {
                   //const pageNr = i + 1;
                   const page = startPage + i;
-                  return(
-                
+                  return (
                     <PageNumber
-                    key={page}
-                    query={{ page }}
-                    currentPage={currentPage === page}
+                      key={page}
+                      query={{ page }}
+                      currentPage={currentPage === page}
                     >
                       {page}
                     </PageNumber>
-                   );
+                  );
                 })}
               </div>
 
@@ -232,13 +227,21 @@ function Pagination({
   );
 }
 
-export function PageNumber({ query, currentPage, children, } : { query: { [key: string]: number }; currentPage?: boolean; children: ReactNode; }) {
+export function PageNumber({
+  query,
+  currentPage,
+  children,
+}: {
+  query: { [key: string]: number };
+  currentPage?: boolean;
+  children: ReactNode;
+}) {
   return (
     <Link
       className={`${currentPage && "bg-neutral-500 px-2 rounded-full"}`}
       href={{
         pathname: "/",
-        query:  query ,
+        query: query,
       }}
     >
       {children}
